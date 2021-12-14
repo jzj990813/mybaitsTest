@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!--核心配置文件 连接数据库-->
+<configuration>
+    <!--引入外部配置文件-->
+    <properties resource="db.properties">
+
+    </properties>
+
+
+    <environments default="development"><!--可多套环境 default为默认选择哪套-->
+ <!--   原始配置
+ <environments default="development">&lt;!&ndash;可多套环境 default为默认选择哪套&ndash;&gt;
+        <environment id="development">
+            <transactionManager type="JDBC"/>&lt;!&ndash;事务管理&ndash;&gt;
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>&lt;!&ndash;新版本需要改动驱动  老版本com.mysql.jdbc.Driver&ndash;&gt;
+                <property name="url" value="jdbc:mysql://localhost:3306/yaodian?useSSL=true&amp;useUnicode=true&amp;characterEncoding=UTF-8"/>
+                <property name="username" value="root"/>
+                <property name="password" value="990813"/>
+            </dataSource>
+        </environment>
+    </environments>-->
+
+    <!--引用后配置书写-->
+        <environment id="development">
+            <transactionManager type="JDBC"/><!--事务管理-->
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/><!--新版本需要改动驱动  老版本com.mysql.jdbc.Driver-->
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!--每一个mapper.xml文件都需要在mybatis核心配置文件注册-->
+    <mappers>
+        <mapper resource="com/jian/dao/AdminMapper.xml"/>
+    </mappers>
+</configuration>

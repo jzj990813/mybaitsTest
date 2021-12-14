@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!--核心配置文件 连接数据库-->
+<configuration>
+
+    <!--引入外部配置文件-->
+    <properties resource="db.properties">
+
+    </properties>
+
+    <!--配置日志-->
+    <settings>
+        <setting name="logImpl" value="LOG4J"/>
+    </settings>
+
+    <!--类型别名  可给实体类起别名-->
+    <typeAliases>
+        <typeAlias type="com.jian.pojo.Admin" alias="Admin"></typeAlias>
+        <!--扫描一个包 扫描实体类 起首字母小写的别名
+        <package name="com.jian.pojo"/>-->
+    </typeAliases>
+
+    <environments default="development"><!--可多套环境 default为默认选择哪套-->
+
+      <!--  <environment id="development">
+            <transactionManager type="JDBC"/>&lt;!&ndash;事务管理&ndash;&gt;
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>&lt;!&ndash;新版本需要改动驱动  老版本com.mysql.jdbc.Driver&ndash;&gt;
+                <property name="url" value="jdbc:mysql://localhost:3306/yaodian?useSSL=true&amp;useUnicode=true&amp;characterEncoding=UTF-8"/>
+                <property name="username" value="root"/>
+                <property name="password" value="990813"/>
+            </dataSource>
+        </environment>-->
+
+        <!--引用后配置书写-->
+        <environment id="development">
+            <transactionManager type="JDBC"/><!--事务管理-->
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/><!--新版本需要改动驱动  老版本com.mysql.jdbc.Driver-->
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!--每一个mapper.xml文件都需要在mybatis核心配置文件注册-->
+    <mappers>
+        <mapper resource="com/jian/dao/AdminMapper.xml"/>
+        <!--<mapper class="com.jian.dao.AdminMapper"></mapper>绑定接口不可同时和resource用>-->
+    </mappers>
+
+</configuration>
